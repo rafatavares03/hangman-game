@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #910909;
+  font-family: 'Roboto', sans-serif;
+}
+
+header {
+  align-items: center;
+  border-bottom: solid 1px #fff;
+  color: #fff;
+  display: flex;
+  height: 80px;
+  justify-content: center;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 10px;
+  width: 100%;
+}
+
+.game {
+  margin: 1rem 0;
+}
+
+.keyboard {
+  display: grid;
+  grid-gap: 0.45rem;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+div[data-key="keyz"] {
+  grid-column-end: span 2;
+  margin-left: auto;
+}
+
+.key {
+  align-items: center;
+  border: solid 1px #fff;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  font-size: 0.8rem;
+  font-weight: 300;
+  justify-content: center;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+footer {
+  color: #fff;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.autor {
+  color: #ff6e6e;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 750px) {
+  .keyboard {
+    grid-gap: 0.5rem;
+  }
+
+  .key {
+    font-size: 1.5rem;
+    height: 3rem;
+    width: 3rem;
+  }
+}
