@@ -5,7 +5,8 @@ function randomWord() {
 }
 
 let word = randomWord();
-console.log(word);
+let game = true;
+let mistakes = 0;
 
 function createLetters() {
   const lettersContainer = document.querySelector('#letters-container');
@@ -15,16 +16,33 @@ function createLetters() {
     letter.classList.add('letter');
     lettersContainer.appendChild(letter);
   }
-
 }
 createLetters();
 
-function rightLetter(text, key) {
+function setHang() {
+  const hangImg = document.querySelector('#hang');
+  if(mistakes <= 6)
+    hangImg.setAttribute('src', `./assets/images/hang${mistakes}.svg`);
+
+}
+
+function rightLetter(letter, text, key) {
+  const letters = document.querySelectorAll('.letter');
+
+  for(let i = 0; i < text.length; i++) {
+    console.log(letter, text[i])
+    if(letter === text[i]) {
+      letters[i].innerText = word[i];
+      letters[i].classList.add('correct');
+    }
+  }
   key.classList.add('right');
 }
 
 function wrongLetter(key) {
   key.classList.add('wrong');
+  mistakes++;
+  setHang();
 }
 
 function verifyLetter(letter, letterCode) {
@@ -33,7 +51,7 @@ function verifyLetter(letter, letterCode) {
 
   if(key) {
     if(!key.classList.contains('.right') || !key.classList.contains('.wrong')){
-      (text.indexOf(letter) >= 0) ? rightLetter(text, key) : wrongLetter(key); 
+      (text.indexOf(letter) >= 0) ? rightLetter(letter, text, key) : wrongLetter(key); 
     }
   }
 }
@@ -41,3 +59,12 @@ function verifyLetter(letter, letterCode) {
 document.querySelector('body').addEventListener('keydown', (e) => {
   verifyLetter(e.key, e.code.toLowerCase());
 })
+
+const keyboard = document.querySelectorAll('.key');
+for(key of keyboard) {
+  key.addEventListener('click', (e) => {
+    const element = e.target;
+    const letter = element.innerHTML.toLowerCase();
+    verifyLetter(letter, `key${letter}`)
+  })
+}
