@@ -5,6 +5,7 @@ function randomWord() {
 }
 
 let word = randomWord();
+console.log(word);
 
 function createLetters() {
   const lettersContainer = document.querySelector('#letters-container');
@@ -12,10 +13,31 @@ function createLetters() {
   for(let i = 0; i < word.length; i++) {
     const letter = document.createElement('span');
     letter.classList.add('letter');
-    console.log(letter)
     lettersContainer.appendChild(letter);
   }
 
 }
-
 createLetters();
+
+function rightLetter(text, key) {
+  key.classList.add('right');
+}
+
+function wrongLetter(key) {
+  key.classList.add('wrong');
+}
+
+function verifyLetter(letter, letterCode) {
+  let text = word.normalize("NFD").replace(/[^a-zA-Z\s]/g, "");
+  const key = document.querySelector(`div[data-key="${letterCode}"]`);
+
+  if(key) {
+    if(!key.classList.contains('.right') || !key.classList.contains('.wrong')){
+      (text.indexOf(letter) >= 0) ? rightLetter(text, key) : wrongLetter(key); 
+    }
+  }
+}
+
+document.querySelector('body').addEventListener('keydown', (e) => {
+  verifyLetter(e.key, e.code.toLowerCase());
+})
