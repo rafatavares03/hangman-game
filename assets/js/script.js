@@ -20,6 +20,7 @@ function createLetters() {
 createLetters();
 
 function gameResults(victory) {
+  console.log(game, mistakes, 'result')
   const title = document.querySelector('#result-title');
   const image = document.querySelector('#result-image');
   const answer = document.querySelector('#answer');
@@ -32,7 +33,6 @@ function gameResults(victory) {
     image.setAttribute('src', './assets/images/defeat.svg');
   }
   answer.innerHTML = `A palavra era: ${word}.`
-
   document.querySelector('.modal').classList.add('display');
 }
 
@@ -46,7 +46,7 @@ function gameStatus() {
   game = (mistakes >= 6 || complete === letters.length) ? false : true;
 
   if(game === false) {
-    setInterval(() => {
+    setTimeout(() => {
       (complete === letters.length) ? gameResults(true) : gameResults(false);
     }, 500);
   }
@@ -88,6 +88,29 @@ function verifyLetter(letter, letterCode) {
   }
 }
 
+function restartGame() {
+  const rightLetters = document.querySelectorAll('.right');
+  for(letter of rightLetters) {
+    letter.classList.remove('right');
+  }
+
+  const wrongLetters = document.querySelectorAll('.wrong');
+  for (letter of wrongLetters) {
+    letter.classList.remove('wrong');
+  }
+
+  const lettersContainer = document.querySelector('#letters-container');
+  lettersContainer.innerHTML = '';
+
+  game = true;
+  mistakes = 0;
+  word = randomWord();
+  createLetters();
+  setHang();
+
+  document.querySelector('.modal').classList.remove('display');
+}
+
 document.querySelector('body').addEventListener('keydown', (e) => {
   verifyLetter(e.key, e.code.toLowerCase());
 })
@@ -100,3 +123,5 @@ for(key of keyboard) {
     verifyLetter(letter, `key${letter}`)
   })
 }
+
+document.querySelector('#restart').addEventListener('click', restartGame);
