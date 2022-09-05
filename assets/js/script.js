@@ -20,7 +20,6 @@ function createLetters() {
 createLetters();
 
 function gameResults(victory) {
-  console.log(game, mistakes, 'result')
   const title = document.querySelector('#result-title');
   const image = document.querySelector('#result-image');
   const answer = document.querySelector('#answer');
@@ -32,7 +31,7 @@ function gameResults(victory) {
     title.innerHTML = 'Infelizmente você <em>perdeu!</em>'
     image.setAttribute('src', './assets/images/defeat.svg');
   }
-  answer.innerHTML = `A palavra era: ${word}.`
+  answer.innerHTML = `A palavra era: <em>${word}</em>.`
   document.querySelector('.modal').classList.add('display');
 }
 
