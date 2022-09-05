@@ -19,37 +19,69 @@ function createLetters() {
 }
 createLetters();
 
+function gameResults(victory) {
+  const title = document.querySelector('#result-title');
+  const image = document.querySelector('#result-image');
+  const answer = document.querySelector('#answer');
+
+  if(victory) {
+    title.innerHTML = 'Parabéns você <em>ganhou!</em>'
+    image.setAttribute('src', './assets/images/victory.svg');
+  } else {
+    title.innerHTML = 'Infelizmente você <em>perdeu!</em>'
+    image.setAttribute('src', './assets/images/defeat.svg');
+  }
+  answer.innerHTML = `A palavra era: ${word}.`
+
+  document.querySelector('.modal').classList.add('display');
+}
+
+function gameStatus() {
+  const letters = document.querySelectorAll('.letter');
+  let complete = 0;
+  for(letter of letters) {
+    complete = (letter.classList.contains('correct')) ? complete + 1 : complete; 
+  }
+
+  game = (mistakes >= 6 || complete === letters.length) ? false : true;
+
+  if(game === false) {
+    setInterval(() => {
+      (complete === letters.length) ? gameResults(true) : gameResults(false);
+    }, 500);
+  }
+}
+
 function setHang() {
   const hangImg = document.querySelector('#hang');
-  if(mistakes <= 6)
-    hangImg.setAttribute('src', `./assets/images/hang${mistakes}.svg`);
-
+  hangImg.setAttribute('src', `./assets/images/hang${mistakes}.svg`);
 }
 
 function rightLetter(letter, text, key) {
   const letters = document.querySelectorAll('.letter');
 
   for(let i = 0; i < text.length; i++) {
-    console.log(letter, text[i])
     if(letter === text[i]) {
       letters[i].innerText = word[i];
       letters[i].classList.add('correct');
     }
   }
   key.classList.add('right');
+  gameStatus();
 }
 
 function wrongLetter(key) {
   key.classList.add('wrong');
   mistakes++;
   setHang();
+  gameStatus();
 }
 
 function verifyLetter(letter, letterCode) {
   let text = word.normalize("NFD").replace(/[^a-zA-Z\s]/g, "");
   const key = document.querySelector(`div[data-key="${letterCode}"]`);
 
-  if(key) {
+  if(key && game) {
     if(!key.classList.contains('.right') || !key.classList.contains('.wrong')){
       (text.indexOf(letter) >= 0) ? rightLetter(letter, text, key) : wrongLetter(key); 
     }

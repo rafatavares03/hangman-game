@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap");
 
 * {
   box-sizing: border-box;
@@ -8,7 +8,7 @@
 
 body {
   background-color: #910909;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 header {
@@ -20,7 +20,7 @@ header {
   justify-content: center;
 }
 
-.container {
+.game-container {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -45,15 +45,15 @@ header {
 .letters {
   align-items: center;
   display: flex;
-  justify-content: center;
   height: 5rem;
+  justify-content: center;
   overflow: auto;
   width: 100%;
 }
 
 .letter {
   color: #fff;
-  border-bottom: solid 3px #111; 
+  border-bottom: solid 3px #111;
   margin: 0 0.5rem;
   display: inline-block;
   width: 1.5rem;
@@ -85,8 +85,8 @@ div[data-key="keyz"] {
   display: flex;
   font-size: 0.8rem;
   font-weight: 300;
-  justify-content: center;
   height: 1.5rem;
+  justify-content: center;
   transition: 0.5s;
   width: 1.5rem;
 }
@@ -103,6 +103,70 @@ div[data-key="keyz"] {
   box-shadow: none;
   color: #ffffff5b;
   cursor: default;
+}
+
+.modal {
+  animation: show 10s;
+  background-color: #00000093;
+  bottom: 0;
+  display: none;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.modal.display {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-container {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0px 5px 15px 5px #910909;
+  display: flex;
+  flex-direction: column;
+  height: 85vh;
+  justify-content: center;
+  text-align: center;
+  width: 80vw;
+}
+
+.modal-container em {
+  font-style: normal;
+  text-transform: uppercase;
+  color: #910909;
+}
+
+.result-image {
+  margin: 2rem 0px;
+  width: 80%;
+}
+
+.modal-container p {
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+.restart-button {
+  background-color: #910909;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 3px #910909;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 2rem;
+  padding: 15px 50px;
+  transition: 0.75s;
+}
+
+.restart-button:hover {
+  box-shadow: 0px 0px 0px 8px #910909;
 }
 
 footer {
@@ -130,5 +194,19 @@ footer {
   .letter {
     font-size: 2rem;
     width: 2rem;
+  }
+
+  .modal-container {
+    width: 50vw;
+  }
+
+  .result-image {
+    width: 70%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .result-image {
+    width: 50%;
   }
 }

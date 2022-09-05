@@ -12,7 +12,7 @@
     <h1>Jogo da Forca</h1>
   </header>
   <main>
-    <section class="container">
+    <section class="game-container">
       <div class="game">
         <img src="./assets/images/hang0.svg" alt="Jogo da Forca" class="hangman" id="hang">
         <div class="letters" id="letters-container"></div>
@@ -45,6 +45,14 @@
         <div data-key="keyb" class="key">B</div>
         <div data-key="keyn" class="key">N</div>
         <div data-key="keym" class="key">M</div>
+      </div>
+    </section>
+    <section class="modal">
+      <div class="modal-container">
+        <h2 id="result-title"></h2>
+        <img id="result-image" class="result-image">
+        <p id="answer"></p>
+        <button class="restart-button" id="restart">Jogar novamente</button>
       </div>
     </section>
   </main>
