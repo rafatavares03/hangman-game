@@ -19,6 +19,11 @@ function createLetters() {
 }
 createLetters();
 
+function setHangImg() {
+  const hangImg = document.querySelector('#hang');
+  hangImg.setAttribute('src', `./assets/images/hang${mistakes}.svg`);
+}
+
 function gameResults(victory) {
   const title = document.querySelector('#result-title');
   const image = document.querySelector('#result-image');
@@ -51,11 +56,6 @@ function gameStatus() {
   }
 }
 
-function setHang() {
-  const hangImg = document.querySelector('#hang');
-  hangImg.setAttribute('src', `./assets/images/hang${mistakes}.svg`);
-}
-
 function rightLetter(letter, text, key) {
   const letters = document.querySelectorAll('.letter');
 
@@ -72,7 +72,7 @@ function rightLetter(letter, text, key) {
 function wrongLetter(key) {
   key.classList.add('wrong');
   mistakes++;
-  setHang();
+  setHangImg();
   gameStatus();
 }
 
@@ -105,7 +105,7 @@ function restartGame() {
   mistakes = 0;
   word = randomWord();
   createLetters();
-  setHang();
+  setHangImg();
 
   document.querySelector('.modal').classList.remove('display');
 }
