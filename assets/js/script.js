@@ -81,7 +81,7 @@ function verifyLetter(letter, letterCode) {
   const key = document.querySelector(`div[data-key="${letterCode}"]`);
 
   if(key && game) {
-    if(!key.classList.contains('.right') || !key.classList.contains('.wrong')){
+    if( key.classList.contains('right') === false && key.classList.contains('wrong') === false ){
       (text.indexOf(letter) >= 0) ? rightLetter(letter, text, key) : wrongLetter(key); 
     }
   }
