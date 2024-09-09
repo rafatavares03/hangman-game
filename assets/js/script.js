@@ -104,7 +104,8 @@ function restartGame() {
 
   game = true;
   mistakes = 0;
-  word = randomWord();
+  //word = randomWord();
+  word = "Hugue";
   createLetters();
   setHangImg();
 
